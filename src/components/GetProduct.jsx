@@ -546,7 +546,7 @@ const GetProducts = () => {
 
         <section className="bg-dark text-light text-center py-3">
           <h5 className="fs-6 mt-2">
-            Developed by Wilmark Kipkirui Korir. &copy;2026. All rights reserved.
+            Developed by Elijah. &copy;2026. All rights reserved.
           </h5>
         </section>
       </footer>

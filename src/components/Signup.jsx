@@ -1,9 +1,14 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Capacitor } from '@capacitor/core';
+import { AdMob } from '@capacitor-community/admob';
 
 const Signup = () => {
   const navigate = useNavigate();
+
+  const APP_ID = "ca-app-pub-7212399669133407~2123650394";
+  const AD_UNIT_ID = "ca-app-pub-7212399669133407/8621835477";
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -39,6 +44,26 @@ const Signup = () => {
     };
   }, [banners.length]);
 
+  useEffect(() => {
+    const initAds = async () => {
+      if (!Capacitor.isNativePlatform()) return;
+      let adListener;
+      try {
+        await AdMob.initialize({ appId: APP_ID });
+        await AdMob.prepareInterstitial({ adUnitId: AD_UNIT_ID });
+        adListener = await AdMob.addListener('interstitialAdShowed', () => {
+          AdMob.prepareInterstitial({ adUnitId: AD_UNIT_ID });
+        });
+      } catch (e) { console.error("AdMob Error:", e); }
+
+      return () => {
+        if (adListener) adListener.remove();
+      };
+    };
+    const cleanup = initAds();
+    return () => cleanup.then(fn => fn && fn());
+  }, [AD_UNIT_ID, APP_ID]);
+
   const submit = async (e) => {
     e.preventDefault();
     setError("");
@@ -62,6 +87,11 @@ const Signup = () => {
       setEmail("");
       setPhone("");
       setPassword("");
+
+      // Show ad after account creation
+      if (Capacitor.isNativePlatform()) {
+        try { await AdMob.showInterstitial(); } catch (e) {}
+      }
 
       // Redirect to Sign In after 2 seconds
       setTimeout(() => navigate("/signin"), 2000);

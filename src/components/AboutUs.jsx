@@ -1,9 +1,42 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Capacitor } from '@capacitor/core';
+import { AdMob } from '@capacitor-community/admob';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const AboutUs = () => {
+  const navigate = useNavigate();
+  const APP_ID = "ca-app-pub-7212399669133407~2123650394";
+  const AD_UNIT_ID = "ca-app-pub-7212399669133407/8621835477";
+
+  useEffect(() => {
+    const initAds = async () => {
+      if (!Capacitor.isNativePlatform()) return;
+      let adListener;
+      try {
+        await AdMob.initialize({ appId: APP_ID });
+        await AdMob.prepareInterstitial({ adUnitId: AD_UNIT_ID });
+        adListener = await AdMob.addListener('interstitialAdShowed', () => {
+          AdMob.prepareInterstitial({ adUnitId: AD_UNIT_ID });
+        });
+      } catch (e) { console.error("AdMob Error:", e); }
+
+      return () => {
+        if (adListener) adListener.remove();
+      };
+    };
+    const cleanup = initAds();
+    return () => cleanup.then(fn => fn && fn());
+  }, [AD_UNIT_ID, APP_ID]);
+
+  const handleExplore = async () => {
+    if (Capacitor.isNativePlatform()) {
+      try { await AdMob.showInterstitial(); } catch (e) {}
+    }
+    navigate("/addproduct");
+  };
+
   return (
     <div className="d-flex flex-column min-vh-100 about-bg">
 
@@ -118,7 +151,9 @@ const AboutUs = () => {
 
         {/* CTA */}
         <div className="text-center mt-5">
-          <Link to="/addproduct" className="btn btn-gradient btn-lg">Explore Products</Link>
+          <button onClick={handleExplore} className="btn btn-gradient btn-lg">
+            Explore Products
+          </button>
         </div>
       </div>
 

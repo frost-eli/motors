@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { Capacitor } from '@capacitor/core';
+import { AdMob } from '@capacitor-community/admob';
 
 const GetProducts = () => {
   const [products, setProducts] = useState([]);
@@ -9,6 +11,37 @@ const GetProducts = () => {
 
   const navigate = useNavigate();
   const img_url = "https://cyberspecter.alwaysdata.net/static/images/";
+
+  const APP_ID = "ca-app-pub-7212399669133407~2123650394";
+  const AD_UNIT_ID = "ca-app-pub-7212399669133407/8621835477";
+
+  // Helper for transitions
+  const handleNav = async (path, state = {}) => {
+    if (Capacitor.isNativePlatform()) {
+      try { await AdMob.showInterstitial(); } catch (e) {}
+    }
+    navigate(path, state);
+  };
+
+  useEffect(() => {
+    const initAds = async () => {
+      if (!Capacitor.isNativePlatform()) return;
+      let adListener;
+      try {
+        await AdMob.initialize({ appId: APP_ID });
+        await AdMob.prepareInterstitial({ adUnitId: AD_UNIT_ID });
+        adListener = await AdMob.addListener('interstitialAdShowed', () => {
+          AdMob.prepareInterstitial({ adUnitId: AD_UNIT_ID });
+        });
+      } catch (e) { console.error("AdMob Error:", e); }
+
+      return () => {
+        if (adListener) adListener.remove();
+      };
+    };
+    const cleanup = initAds();
+    return () => cleanup.then(fn => fn && fn());
+  }, [AD_UNIT_ID, APP_ID]);
 
   // Fetch products from API
   const getProducts = async () => {
@@ -166,7 +199,7 @@ const GetProducts = () => {
               className="carousel-item active"
               onClick={() => {
                 if (products.length > 0) {
-                  navigate("/makepayment", { state: { product: products[0] } });
+                  handleNav("/makepayment", { state: { product: products[0] } });
                 }
               }}
               style={{ cursor: "pointer" }}
@@ -182,7 +215,7 @@ const GetProducts = () => {
                   onClick={(e) => {
                     e.stopPropagation(); // Prevents the parent div's onClick from firing twice
                     if (products.length > 0) {
-                      navigate("/makepayment", { state: { product: products[0] } });
+                      handleNav("/makepayment", { state: { product: products[0] } });
                     }
                   }}
                 >
@@ -194,7 +227,7 @@ const GetProducts = () => {
             {/* Slide 2 → AddProduct */}
             <div
               className="carousel-item"
-              onClick={() => navigate("/addproduct")}
+              onClick={() => handleNav("/addproduct")}
               style={{ cursor: "pointer" }}
             >
               <img src="/images2/willy 91.jpeg" className="d-block w-100 carousel-img" alt="slide2" />
@@ -206,7 +239,7 @@ const GetProducts = () => {
                   className="btn btn-warning"
                   onClick={(e) => {
                     e.stopPropagation();
-                    navigate("/addproduct");
+                    handleNav("/addproduct");
                   }}
                 >Add Product</button>
               </div>
@@ -244,7 +277,7 @@ const GetProducts = () => {
             {/* Slide 4 → SignIn / SignUp */}
             <div
               className="carousel-item"
-              onClick={() => navigate("/signin")}
+              onClick={() => handleNav("/signin")}
               style={{ cursor: "pointer" }}
             >
               <img src="/images2/willy 94.jpeg" className="d-block w-100 carousel-img" alt="slide4" />
@@ -252,8 +285,8 @@ const GetProducts = () => {
                 <h1>Join FitSpare Motors</h1>
                 <p>Sign in or sign up to start buying or selling today.</p>
                 <p className="features">🔐 Sign In | 📝 Sign Up | ⭐ Trusted Community</p>
-                <button className="btn btn-outline-light me-2" onClick={(e) => { e.stopPropagation(); navigate("/signin"); }}>Sign In</button>
-                <button className="btn btn-primary" onClick={(e) => { e.stopPropagation(); navigate("/signup"); }}>Sign Up</button>
+                <button className="btn btn-outline-light me-2" onClick={(e) => { e.stopPropagation(); handleNav("/signin"); }}>Sign In</button>
+                <button className="btn btn-primary" onClick={(e) => { e.stopPropagation(); handleNav("/signup"); }}>Sign Up</button>
               </div>
             </div>
 
@@ -314,7 +347,7 @@ const GetProducts = () => {
           <div className='img-overlay'>
             <button
               className='btn btn-outline-light quick-btn'
-              onClick={() => navigate('/makepayment', { state: { product } })}
+              onClick={() => handleNav('/makepayment', { state: { product } })}
             >
               Quick Buy
             </button>
@@ -328,7 +361,7 @@ const GetProducts = () => {
           <b className='text-warning fs-5 price-highlight'>ksh: {product.product_cost}</b> <br />
           <button
             className='btn btn-primary mt-2 btn-animate'
-            onClick={() => navigate('/makepayment', { state: { product } })}
+            onClick={() => handleNav('/makepayment', { state: { product } })}
           >
             Buy Now
           </button>

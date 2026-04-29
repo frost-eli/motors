@@ -1,9 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Capacitor } from '@capacitor/core';
+import { AdMob } from '@capacitor-community/admob';
 import axios from "axios";
 
 const AddProduct = () => {
   const navigate = useNavigate();
+
+  const APP_ID = "ca-app-pub-7212399669133407~2123650394";
+  const AD_UNIT_ID = "ca-app-pub-7212399669133407/8621835477";
+
+  useEffect(() => {
+    const initAds = async () => {
+      if (!Capacitor.isNativePlatform()) return;
+      let adListener;
+      try {
+        await AdMob.initialize({ appId: APP_ID });
+        await AdMob.prepareInterstitial({ adUnitId: AD_UNIT_ID });
+        adListener = await AdMob.addListener('interstitialAdShowed', () => {
+          AdMob.prepareInterstitial({ adUnitId: AD_UNIT_ID });
+        });
+      } catch (e) { console.error("AdMob Error:", e); }
+
+      return () => {
+        if (adListener) adListener.remove();
+      };
+    };
+    const cleanup = initAds();
+    return () => cleanup.then(fn => fn && fn());
+  }, [AD_UNIT_ID, APP_ID]);
 
   const [product_name, setProduct_name] = useState("");
   const [product_description, setProduct_description] = useState("");
@@ -50,6 +75,11 @@ const AddProduct = () => {
       setProduct_cost("");
       setProduct_photo(null);
       setPreviewUrl(null);
+
+      // Show ad after product listing
+      if (Capacitor.isNativePlatform()) {
+        try { await AdMob.showInterstitial(); } catch (e) {}
+      }
     } catch (err) {
       setError(err.response?.data?.message || "Something went wrong");
     } finally {
@@ -220,7 +250,7 @@ const AddProduct = () => {
         }
         .btn-gradient:hover {
           transform: scale(1.05);
-        }
+        }nn
       `}</style>
     </div>
   );

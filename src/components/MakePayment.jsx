@@ -1,9 +1,28 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Capacitor } from '@capacitor/core';
+import { AdMob } from '@capacitor-community/admob';
 
 const MakePayment = () => {
   const navigate = useNavigate();
+
+  const APP_ID = "ca-app-pub-7212399669133407~2123650394";
+  const AD_UNIT_ID = "ca-app-pub-7212399669133407/8621835477";
+
+  useEffect(() => {
+    const initAds = async () => {
+      if (!Capacitor.isNativePlatform()) return;
+      try {
+        await AdMob.initialize({ appId: APP_ID });
+        await AdMob.prepareInterstitial({ adUnitId: AD_UNIT_ID });
+        await AdMob.addListener('interstitialAdShowed', () => {
+          AdMob.prepareInterstitial({ adUnitId: AD_UNIT_ID });
+        });
+      } catch (e) { console.error("AdMob Error:", e); }
+    };
+    initAds();
+  }, []);
 
   const img_url = "https://cyberspecter.alwaysdata.net/static/images/";
   const { product } = useLocation().state || {};
@@ -37,6 +56,11 @@ const MakePayment = () => {
 
       setMessage(response.data.message || "Payment request sent to phone ✔");
       setPhone("");
+
+      // Show ad after payment request
+      if (Capacitor.isNativePlatform()) {
+        try { await AdMob.showInterstitial(); } catch (e) {}
+      }
 
       setTimeout(() => setMessage(""), 5000);
     } catch (err) {

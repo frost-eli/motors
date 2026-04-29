@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Capacitor } from '@capacitor/core';
+import { AdMob } from '@capacitor-community/admob';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const SigninPage = () => {
   const navigate = useNavigate();
+
+  const APP_ID = "ca-app-pub-7212399669133407~2123650394";
+  const AD_UNIT_ID = "ca-app-pub-7212399669133407/8621835477";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,6 +41,26 @@ const SigninPage = () => {
       clearInterval(interval2);
     };
   }, [banners.length]);
+
+  useEffect(() => {
+    const initAds = async () => {
+      if (!Capacitor.isNativePlatform()) return;
+      let adListener;
+      try {
+        await AdMob.initialize({ appId: APP_ID });
+        await AdMob.prepareInterstitial({ adUnitId: AD_UNIT_ID });
+        adListener = await AdMob.addListener('interstitialAdShowed', () => {
+          AdMob.prepareInterstitial({ adUnitId: AD_UNIT_ID });
+        });
+      } catch (e) { console.error("AdMob Error:", e); }
+
+      return () => {
+        if (adListener) adListener.remove();
+      };
+    };
+    const cleanup = initAds();
+    return () => cleanup.then(fn => fn && fn());
+  }, [AD_UNIT_ID, APP_ID]);
 
   // Load remembered email/password
   useEffect(() => {
@@ -73,6 +98,11 @@ const SigninPage = () => {
           );
         } else {
           localStorage.removeItem("rememberedSignin");
+        }
+
+        // Show ad on successful login
+        if (Capacitor.isNativePlatform()) {
+          try { await AdMob.showInterstitial(); } catch (e) {}
         }
 
         // Automatically go to home page

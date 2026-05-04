@@ -10,7 +10,7 @@ const GetProducts = () => {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
-  const img_url = "https://cyberspecter.alwaysdata.net/static/images/";
+  const img_url = "https://elijahfungo.alwaysdata.net/static/images/";
 
   const APP_ID = "ca-app-pub-7212399669133407~2123650394";
   const AD_UNIT_ID = "ca-app-pub-7212399669133407/8621835477";
@@ -48,7 +48,7 @@ const GetProducts = () => {
     setLoading("Loading products, please wait...");
     setError("");
     try {
-      const response = await axios.get("https://cyberspecter.alwaysdata.net/api/get_product_details");
+      const response = await axios.get("https://elijahfungo.alwaysdata.net/api/get_product_details");
       setProducts(response.data);
       setLoading("");
     } catch (err) {
@@ -102,9 +102,9 @@ const GetProducts = () => {
       {/* CENTERED ANIMATED OFFER WORDS */}
       <div className="offer-words d-flex justify-content-center align-items-center">
         <div className="fade-text-wrapper">
-          <span className="fade-text">🔥 Best Deals on Car Parts! 🔥</span>
-          <span className="fade-text">💥 Limited Time Offers! 💥</span>
-          <span className="fade-text">🚗 Genuine & Affordable! 🚗</span>
+          <span className="fade-text"> Best Deals on Car Parts! </span>
+          <span className="fade-text"> Limited Time Offers! </span>
+          <span className="fade-text"> Genuine & Affordable!</span>
           <span className="fade-text">⚡ Fast Delivery & Trusted Quality! ⚡</span>
         </div>
       </div>
@@ -206,10 +206,10 @@ const GetProducts = () => {
             >
               <img src="/images2/willy 90.jpeg" className="d-block w-100 carousel-img" alt="slide1" />
               <div className="carousel-caption colourful-caption">
-                <span className="badge bg-warning text-dark mb-2">🔥 Special Offer Available</span>
+                <span className="badge bg-warning text-dark mb-2"> Special Offer Available</span>
                 <h1>Welcome to FitSpare Motors</h1>
                 <p>Your trusted destination for genuine car spare parts.</p>
-                <p className="features">✔ Genuine Parts | ✔ Affordable Prices | ✔ Trusted Quality</p>
+                <p className="features"> Genuine Parts  Affordable Prices |  Trusted Quality</p>
                 <button 
                   className="btn btn-danger me-2"
                   onClick={(e) => {
@@ -234,7 +234,7 @@ const GetProducts = () => {
               <div className="carousel-caption colourful-caption">
                 <h1>Want to Sell Your Spare Parts?</h1>
                 <p>Add your product quickly and reach thousands of buyers.</p>
-                <p className="features">➕ Add Product | ⚙ Easy Upload | 🛠 Secure Listing</p>
+                <p className="features"> Add Product |  Easy Upload |  Secure Listing</p>
                 <button 
                   className="btn btn-warning"
                   onClick={(e) => {
@@ -258,7 +258,7 @@ const GetProducts = () => {
               <div className="carousel-caption colourful-caption">
                 <h1>Secure & Easy Payment</h1>
                 <p>Pay quickly and safely for the parts you need.</p>
-                <p className="features">💳 Multiple Payment Options | 🔒 Safe & Reliable</p>
+                <p className="features"> Multiple Payment Options |  Safe & Reliable</p>
                 <button 
                   className='btn btn-outline-light'
                   onClick={(e) => {
@@ -284,7 +284,7 @@ const GetProducts = () => {
               <div className="carousel-caption colourful-caption">
                 <h1>Join FitSpare Motors</h1>
                 <p>Sign in or sign up to start buying or selling today.</p>
-                <p className="features">🔐 Sign In | 📝 Sign Up | ⭐ Trusted Community</p>
+                <p className="features"> Sign In |  Sign Up |  Trusted Community</p>
                 <button className="btn btn-outline-light me-2" onClick={(e) => { e.stopPropagation(); handleNav("/signin"); }}>Sign In</button>
                 <button className="btn btn-primary" onClick={(e) => { e.stopPropagation(); handleNav("/signup"); }}>Sign Up</button>
               </div>
@@ -321,7 +321,7 @@ const GetProducts = () => {
     ))}
   </div>
 
-  <h3 className='text-center text-primary mb-3 section-title'>🔥 Hot Offers - Available Products 🔥</h3>
+  <h3 className='text-center text-primary mb-3 section-title'> Hot Offers - Available Products </h3>
   {loading && <h4 className='text-info mb-3'>{loading}</h4>}
   {error && <h4 className='text-danger mb-3'>{error}</h4>}
 
@@ -334,8 +334,8 @@ const GetProducts = () => {
       <div className='card shadow p-3 text-center hover-card gradient-card position-relative'>
 
         {/* Hot Deal / Limited Stock Badge */}
-        <span className='badge bg-danger position-absolute top-0 start-0 m-2 deal-badge'>🔥 Hot Deal</span>
-        <span className='badge bg-warning position-absolute top-0 end-0 m-2 deal-badge'>⏳ Limited Stock</span>
+        <span className='badge bg-danger position-absolute top-0 start-0 m-2 deal-badge'> Hot Deal</span>
+        <span className='badge bg-warning position-absolute top-0 end-0 m-2 deal-badge'> Limited Stock</span>
 
         {/* Product Image with Overlay */}
         <div className='img-wrapper position-relative overflow-hidden'>
@@ -502,7 +502,7 @@ const GetProducts = () => {
     }
   `}</style>
 </div>
-            {/* ========== FOOTER ========== */}
+            {/* FOOTER  */}
       <footer className="mt-auto">
         <section className="row bg-danger text-light p-4">
           <div className="col-md-3 text-center mb-4">

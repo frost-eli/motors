@@ -20,7 +20,7 @@ const SigninPage = () => {
   const [error, setError] = useState("");
 
   const [banners] = useState([
-    "🚀 Welcome Back! Sign In Now! 🚀",
+    " Welcome Back! Sign In Now! ",
     "Access your account and grab deals!",
     "Sign in to continue your FitSpare journey!",
     "Your car parts are just a login away!"
@@ -83,7 +83,7 @@ const SigninPage = () => {
       data.append("password", password);
 
       const response = await axios.post(
-        "https://cyberspecter.alwaysdata.net/api/signin",
+        "https://elijahfungo.alwaysdata.net/api/signin",
         data
       );
 

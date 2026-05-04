@@ -24,7 +24,7 @@ const MakePayment = () => {
     initAds();
   }, []);
 
-  const img_url = "https://cyberspecter.alwaysdata.net/static/images/";
+  const img_url = "https://elijahfungo.alwaysdata.net/static/images/";
   const { product } = useLocation().state || {};
 
   const [phone, setPhone] = useState("");
@@ -50,7 +50,7 @@ const MakePayment = () => {
       data.append("amount", product.product_cost);
 
       const response = await axios.post(
-        "https://cyberspecter.alwaysdata.net/api/mpesa_payment",
+        "https://elijahfungo.alwaysdata.net/api/mpesa_payment",
         data
       );
 

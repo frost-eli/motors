@@ -22,7 +22,7 @@ const Signup = () => {
 
   // Signup banner messages
   const [banners] = useState([
-    "🚀 Join FitSpare Motors Today! 🚀",
+    " Join FitSpare Motors Today! ",
     "Sign up to access exclusive deals!",
     "Create your account in seconds!",
     "Be part of our growing car parts community!"
@@ -78,7 +78,7 @@ const Signup = () => {
       data.append("password", password);
 
       const response = await axios.post(
-        "https://cyberspecter.alwaysdata.net/api/signup",
+        "https://elijahfungo.alwaysdata.net/api/signup",
         data
       );
 

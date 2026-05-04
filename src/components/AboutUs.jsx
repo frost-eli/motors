@@ -5,6 +5,7 @@ import { AdMob } from '@capacitor-community/admob';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
+// adding the ads
 const AboutUs = () => {
   const navigate = useNavigate();
   const APP_ID = "ca-app-pub-7212399669133407~2123650394";
@@ -98,7 +99,7 @@ const AboutUs = () => {
               <div className="card shadow hover-card">
                 <img src="/images2/wilmark.jpeg" alt="Team Member" className="card-img-top"/>
                 <div className="card-body">
-                  <h5 className="card-title">Wilmark Korir</h5>
+                  <h5 className="card-title">Elijah Mosoito</h5>
                   <p className="card-text">Founder & Developer</p>
                 </div>
               </div>
@@ -107,7 +108,7 @@ const AboutUs = () => {
               <div className="card shadow hover-card">
                 <img src="/images2/jane.jpeg" alt="Team Member" className="card-img-top"/>
                 <div className="card-body">
-                  <h5 className="card-title">Jane Doe</h5>
+                  <h5 className="card-title">Annet Joylne</h5>
                   <p className="card-text">Operations Manager</p>
                 </div>
               </div>
@@ -116,7 +117,7 @@ const AboutUs = () => {
               <div className="card shadow hover-card">
                 <img src="/images2/john.jpeg" alt="Team Member" className="card-img-top"/>
                 <div className="card-body">
-                  <h5 className="card-title">John Smith</h5>
+                  <h5 className="card-title">Bukayo Saka</h5>
                   <p className="card-text">Customer Support</p>
                 </div>
               </div>

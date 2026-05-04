@@ -65,7 +65,7 @@ const AddProduct = () => {
       data.append("product_photo", product_photo);
 
       const response = await axios.post(
-        "https://cyberspecter.alwaysdata.net/api/add_product",
+        "https://elijahfungo.alwaysdata.net/api/add_products",
         data
       );
 
@@ -119,7 +119,7 @@ const AddProduct = () => {
 
       {/* OFFER BANNER */}
       <div className="offer-banner d-flex flex-column justify-content-center align-items-center text-center text-light">
-        <h1 className="mb-2 flash-text">🔥 HOT DEALS ALERT! 🔥</h1>
+        <h1 className="mb-2 flash-text"> HOT DEALS ALERT! </h1>
         <h3 className="animated-text">Add your products now and grab attention! Limited Time Offer!</h3>
       </div>
 
@@ -185,7 +185,7 @@ const AddProduct = () => {
         <p>Follow us on social media for exclusive deals!</p>
       </footer>
 
-      {/* ===== STYLES ===== */}
+      {/* STYLES */}
       <style>{`
         /* Background Gradient */
         .offer-bg {

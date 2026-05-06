@@ -126,7 +126,7 @@ const AddProduct = () => {
       {/* ADD PRODUCT FORM */}
       <div className="container flex-grow-1 d-flex justify-content-center align-items-start py-5">
         <div className="card p-4 shadow-lg offer-card">
-          <h3 className="text-center mb-3 text-warning">Add Product</h3>
+          <h3 className="text-center mb-3 text-warning">Add spare parts</h3>
 
           {loading && <p className="text-warning text-center">Adding product...</p>}
           {error && <p className="text-danger text-center">{error}</p>}

@@ -22,6 +22,9 @@ const GetProducts = () => {
     }
     navigate(path, state);
   };
+  
+
+  
 
   useEffect(() => {
     const initAds = async () => {
@@ -65,7 +68,7 @@ const GetProducts = () => {
     <div className="d-flex flex-column min-vh-100">
 
   {/* NAVBAR */}
-    {/* NAVBAR */}
+    
       <nav className="navbar navbar-expand-md offer-navbar sticky-top">
         <div className="container">
           <img
@@ -102,10 +105,11 @@ const GetProducts = () => {
       {/* CENTERED WORDS */}
       <div className="offer-words d-flex justify-content-center align-items-center">
         <div className="fade-text-wrapper">
-          <span className="fade-text"> Best Deals on Car Parts! </span>
+          <span className="fade-text"> Best Deals on Car Parts </span>
          
         </div>
       </div>
+      
 
       {/* STYLES */}
       <style>{`
@@ -161,8 +165,7 @@ const GetProducts = () => {
 
         @keyframes fadeInOut {
           0%, 20% { opacity: 0; transform: translateY(20px); }
-          25%, 50% { opacity: 1; transform: translateY(0); }
-          55%, 100% { opacity: 0; transform: translateY(-20px); }
+          
         }
       `}</style>
       {/* ========== CAROUSEL ========== */}

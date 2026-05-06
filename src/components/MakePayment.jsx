@@ -76,7 +76,7 @@ const MakePayment = () => {
   if (!product) {
     return (
       <p className="text-center text-danger mt-5">
-        No product selected!
+        No product selected
       </p>
     );
   }
@@ -115,7 +115,7 @@ const MakePayment = () => {
           <h5>{product.product_name}</h5>
           <p>{product.product_description}</p>
           <p className="product-cost">
-            Ksh {product.product_cost}
+            Kes {product.product_cost}
           </p>
         </div>
 
@@ -124,7 +124,7 @@ const MakePayment = () => {
           <input
             type="tel"
             className="form-control mb-3 rounded-pill"
-            placeholder="Enter phone number (07XXXXXXXX)"
+            placeholder="Enter phone number (+2547XXXXXXXX)"
             required
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
@@ -139,7 +139,7 @@ const MakePayment = () => {
             {loading ? "Processing..." : "Pay Now"}
           </button>
 
-          {/* BACK BUTTON (FIXED) */}
+          {/* BACK BUTTON  */}
           <button
             type="button"
             className="btn btn-secondary w-100 rounded-pill"

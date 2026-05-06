@@ -232,30 +232,15 @@ const Signup = () => {
           color: #ffd633 !important;
           transform: scale(1.1);
         }
-        .offer-banner {
-          height: 250px;
-          background: linear-gradient(45deg, #ff6666, #ffcc66);
-          box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-          margin-bottom: 30px;
-          padding: 20px;
-          border-radius: 15px;
+          .flash-text {
+          color:black;
         }
-        .flash-text {
-          animation: flash 1.5s infinite;
-        }
-        @keyframes flash {
-          0%,50%,100% { opacity:1; }
-          25%,75% { opacity:0; }
-        }
+        
         .animated-text {
           font-size: 1.5rem;
           font-weight: bold;
-          color: #fff;
+          color: #e15e21;
           animation: appearDisappear 4s infinite;
-        }
-        @keyframes appearDisappear {
-          0%,25%,100% { opacity:0; }
-          50%,75% { opacity:1; }
         }
         .offer-card {
           border-radius: 20px;

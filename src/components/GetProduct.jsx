@@ -99,13 +99,11 @@ const GetProducts = () => {
         </div>
       </nav>
 
-      {/* CENTERED ANIMATED OFFER WORDS */}
+      {/* CENTERED WORDS */}
       <div className="offer-words d-flex justify-content-center align-items-center">
         <div className="fade-text-wrapper">
           <span className="fade-text"> Best Deals on Car Parts! </span>
-          <span className="fade-text"> Limited Time Offers! </span>
-          <span className="fade-text"> Genuine & Affordable!</span>
-          <span className="fade-text">⚡ Fast Delivery & Trusted Quality! ⚡</span>
+         
         </div>
       </div>
 
@@ -159,9 +157,7 @@ const GetProducts = () => {
         }
 
         .fade-text:nth-child(1) { animation-delay: 0s; }
-        .fade-text:nth-child(2) { animation-delay: 2s; }
-        .fade-text:nth-child(3) { animation-delay: 4s; }
-        .fade-text:nth-child(4) { animation-delay: 6s; }
+      
 
         @keyframes fadeInOut {
           0%, 20% { opacity: 0; transform: translateY(20px); }
@@ -333,10 +329,7 @@ const GetProducts = () => {
     >
       <div className='card shadow p-3 text-center hover-card gradient-card position-relative'>
 
-        {/* Hot Deal / Limited Stock Badge */}
-        <span className='badge bg-danger position-absolute top-0 start-0 m-2 deal-badge'> Hot Deal</span>
-        <span className='badge bg-warning position-absolute top-0 end-0 m-2 deal-badge'> Limited Stock</span>
-
+       
         {/* Product Image with Overlay */}
         <div className='img-wrapper position-relative overflow-hidden'>
           <img

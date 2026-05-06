@@ -169,31 +169,19 @@ const AboutUs = () => {
         .about-bg {
           background: linear-gradient(135deg, #f0f0f0, #ffe6e6, #f0f0f0);
         }
-        .hero-banner {
-          height: 250px;
-          background: linear-gradient(45deg, #ff6666, #ffcc66);
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          text-shadow: 1px 1px 5px #000;
-          margin-bottom: 30px;
-          border-radius: 15px;
-        }
         .flash-text {
-          animation: flash 1.5s infinite;
-        }
-        @keyframes flash {
-          0%, 50%, 100% { opacity: 1; }
-          25%, 75% { opacity: 0; }
-        }
-        .animated-text {
-          animation: appearDisappear 4s infinite;
-        }
-        @keyframes appearDisappear {
+          color:black;
+        } @keyframes appearDisappear {
           0%, 25%, 100% { opacity: 0; }
           50%, 75% { opacity: 1; }
         }
+           .animated-text {
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: #e26121;
+         
+        }
+
         .offer-navbar {
           background: linear-gradient(90deg, #ff4d4d, #ffb84d);
           font-weight: bold;

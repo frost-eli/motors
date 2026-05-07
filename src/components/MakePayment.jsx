@@ -115,7 +115,7 @@ const MakePayment = () => {
           <h5>{product.product_name}</h5>
           <p>{product.product_description}</p>
           <p className="product-cost">
-            Kes {product.product_cost}
+            KSH {product.product_cost}
           </p>
         </div>
 
@@ -124,7 +124,7 @@ const MakePayment = () => {
           <input
             type="tel"
             className="form-control mb-3 rounded-pill"
-            placeholder="Enter phone number (+2547XXXXXXXX)"
+            placeholder="Enter phone number (+2547..)"
             required
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
